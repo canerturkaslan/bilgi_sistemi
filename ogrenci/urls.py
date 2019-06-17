@@ -10,6 +10,9 @@ urlpatterns = [
 
 from django.conf.urls import url
 from ogrenci import views
+
 urlpatterns = [
     url(r'^$', views.home_page, name='home'),
+    url(r'^(?P<notlar_id>\d+)/add/$', views.add_not_page, name='add'),
+
 ]
