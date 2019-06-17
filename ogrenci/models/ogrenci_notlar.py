@@ -10,4 +10,4 @@ class Notlar(models.Model):
     puan = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)])
 
     def __str__(self):
-        return {self.ogrenci_id}, {self.ders_id},{self.puan}
+        return "{}  {} - {}".format(self.ogrenci_id, self.ders_id,self.puan)
