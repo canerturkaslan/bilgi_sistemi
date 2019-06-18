@@ -1,0 +1,14 @@
+.idea
+.venv
+venv
+idea
+IDEA
+VENV
+ENV
+env
+.env
+db.sqlite3
+__pycache__
+__pycache__/
+
+
