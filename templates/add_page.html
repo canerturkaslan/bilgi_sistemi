@@ -1,0 +1,42 @@
+
+{% block content %}
+<h1>Talep Yap</h1>
+
+<form action="{% url 'add' %}" method="POST" class="col-lg-8 offset-lg-2">
+    {% csrf_token %}
+    <br>
+    <div class="row">
+
+        <div class="col-lg-6 col-md-12">
+            <div class="form-group row">
+                <label for="ip" class="col-lg-4 col-form-label">Başlık</label>
+                <div class="col-lg-8">
+                    <input type="text" name="dersler_id" class="form-control">
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" name="ogrenci_id" class="form-control">
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" name="puan" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 offset-lg-6">
+            <div class="form-group row">
+                <div class="col-lg-4 offset-lg-8">
+                    <button type="submit" class="form-control btn btn-success">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+
+
+

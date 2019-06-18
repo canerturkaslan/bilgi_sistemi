@@ -22,4 +22,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_page, name='home'),
+    path('add', views.add_not_page, name='add'),
 ]

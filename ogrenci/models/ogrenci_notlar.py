@@ -5,9 +5,9 @@ from .ogrenci import Ogrenci
 
 
 class Notlar(models.Model):
-    ogrenci_id = models.ForeignKey('Ogrenci', on_delete=models.CASCADE)
-    ders_id = models.ForeignKey('Dersler', on_delete=models.CASCADE)
-    puan = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)])
+    ogrenci = models.ForeignKey('Ogrenci', on_delete=models.CASCADE)
+    dersler = models.ForeignKey('Dersler', on_delete=models.CASCADE)
+    puan = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(10)])
 
     def __str__(self):
-        return "{}  {} - {}".format(self.ogrenci_id, self.ders_id,self.puan)
+        return "{}  {} - {}".format(self.ogrenci, self.dersler,self.puan)

@@ -38,36 +38,32 @@ class NotDetailViewTests(TestCase):
         )
         return bolum_test
 
-    def ogrenci_olustur(self, isim, soyisim, bolum_id):
-        bolum_id = self.bolum_olustur("elektronik muhendisligi")
+    def ogrenci_olustur(self, isim, soyisim, bolum,telefon):
+
         ogrenci_test = Ogrenci.objects.create(
             isim=isim,
             soyisim=soyisim,
-            bolum_id=bolum_id)
+            bolum=bolum,
+            telefon=telefon)
         return ogrenci_test
 
-    def ders_olustur(self, ders_adi, bolum_id):
-        bolum_id = self.bolum_olustur("bilgisayar muhendisligi")
+    def ders_olustur(self, ders_adi, bolum):
+
         ders_test = Dersler.objects.create(
             ders_adi=ders_adi,
-            bolum_id=bolum_id)
+            bolum=bolum)
         return ders_test
 
-    def setUp(self):
-        super(NotDetailViewTests, self).setUp()
-        self.notlar = Notlar.objects.create(ders_id=self.ders_olustur("matematik",1),
-                                            ogrenci_id=self.ogrenci_olustur("caner","turkaslan",1),
-                                            puan=45)
 
-    def tearDown(self):
-        super(NotDetailViewTests, self).tearDown()
-        self.notlar.delete()
-
-    def test_add_not_success(self):
-        response = self.client.get('/add/', args=(self.notlar.id,))
+    def test_post(self):
+        bolum = self.bolum_olustur("fizik")
+        ogrenci = self.ogrenci_olustur("caner", "turkaslan", bolum, "+90 531 406 01 89")
+        dersler= self.ders_olustur("matematik",bolum)
+        c = Client()
+        response = c.post('/add', {'ogrenci_id': ogrenci.id, 'dersler_id': dersler.id,'puan':-5})
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response,self.notlar.id)
+        self.assertEqual(Ogrenci.objects.filter(isim='caner').count(), 1)
 
     def test_post_detail_404(self):
-        response = self.client.get('/add/', args=(sys.maxsize,))
+        response = self.client.get('/add/', args=(sys.maxsize))
         self.assertEqual(response.status_code, 404)
