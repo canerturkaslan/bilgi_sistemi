@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ogrenci.apps.OgrenciConfig',
     'rest_framework',
+    'tastypie',
 ]
 
 REST_FRAMEWORK = {
