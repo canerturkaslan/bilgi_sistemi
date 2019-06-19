@@ -22,6 +22,7 @@ class OgrenciModelTestCase(TestCase):
         bolum=self.bolum_olustur("matematik")
         telefon="+90 (531) 406 01 95"
         test=self.ogrenci_olustur("Caner","Turkaslan",bolum,telefon)
+        test.save()
         self.assertRaises(ValidationError, test.full_clean)
         self.assertEqual(Ogrenci.objects.filter(isim='Caner').count(), 1)
 
