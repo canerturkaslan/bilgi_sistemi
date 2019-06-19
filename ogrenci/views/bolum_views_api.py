@@ -1,12 +1,17 @@
-from rest_framework import generics
 from ogrenci.models import Bolumler
 from ogrenci.serializers.bolum_serializers import BolumSerializer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.mixins import (
+    CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin,DestroyModelMixin
+)
+from rest_framework.viewsets import GenericViewSet
 
 
-class ListBolumsView(generics.ListAPIView):
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated,)
-    queryset = Bolumler.objects.all()
-    serializer_class = BolumSerializer
+class BolumViewSet(GenericViewSet,  # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,  # handles GETs for 1 bolum
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin,
+                     DestroyModelMixin):  # handles GETs for many bolum
+
+      serializer_class = BolumSerializer
+      queryset = Bolumler.objects.all()

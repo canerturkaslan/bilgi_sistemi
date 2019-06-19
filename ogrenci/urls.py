@@ -1,6 +1,8 @@
-from django.urls import path
-from ogrenci.views.bolum_views_api import ListBolumsView
+from ogrenci.views.bolum_views_api import BolumViewSet
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('bolums/', ListBolumsView.as_view(), name="bolums-all")
-]
+
+router = DefaultRouter()
+router.register(r'bolum', BolumViewSet,base_name='bolumler')
+
+urlpatterns = router.urls
