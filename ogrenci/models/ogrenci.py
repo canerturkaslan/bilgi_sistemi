@@ -6,7 +6,6 @@ import re
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-
 def validate_telefon(value):
     if re.match('^\+(\d{2})\s\((\d{3})\)\s(\d{3})\s(\d{2})\s(\d{2})', value):
         raise ValidationError('Disallowed Phone')
