@@ -59,7 +59,7 @@ class EntryResourceDersTest(BaseDersViewTest,ResourceTestCaseMixin,APITestCase):
     def test_create_ders_api(self):
 
         url = '/api/v1/ders/'
-        data = {'bolum': 2,'ders_adi':"Devre"}
+        data = {'bolum': 'Bilgisayar Muh','ders_adi':"Devre"}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Dersler.objects.count(), 3)
@@ -75,11 +75,10 @@ class EntryResourceDersTest(BaseDersViewTest,ResourceTestCaseMixin,APITestCase):
 
     def test_put_ders_api(self):
         url = '/api/v1/ders/1/'
-        data = {'bolum': 2,'ders_adi':"Felsefe"}
+        data = {'bolum':'Bilgisayar Muh','ders_adi':"Felsefe"}
         response = self.client.put(url,data)
         self.assertNotEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        test_db=Dersler.objects.get(bolum=2,ders_adi="Felsefe")#BURDA KALDI DERS ADI PUT
-        self.assertEqual(2,test_db.bolum_id)
+        test_db=Dersler.objects.get(ders_adi="Felsefe")#BURDA KALDI DERS ADI PUT
         self.assertEqual("Felsefe",test_db.ders_adi)
 
 
