@@ -1,6 +1,6 @@
 from django.test import TestCase
 from ogrenci.models.bolumler import Bolumler
-from ogrenci.models.ogrenci import Ogrenci
+from ogrenci.models.ogrenci import Ogrenci,validate_telefon
 from django.core.exceptions import ValidationError
 
 
@@ -22,15 +22,16 @@ class OgrenciModelTestCase(TestCase):
         bolum=self.bolum_olustur("matematik")
         telefon="+90 (531) 406 01 95"
         test=self.ogrenci_olustur("Caner","Turkaslan",bolum,telefon)
-        self.assertRaises(ValidationError, test.full_clean)
-        self.assertEqual(Ogrenci.objects.filter(isim='Caner').count(), 1)
+        self.assertRaises(ValidationError,test.full_clean())
 
     def test_telefon_regex_not(self):
         bolum=self.bolum_olustur("matematik")
         telefon="5314060189"
-        test=self.ogrenci_olustur("caner", "turkaslan", bolum, telefon)
-        test.save()
-        self.assertRaises(ValidationError, test.full_clean)
+        self.ogrenci_olustur("caner", "turkaslan", bolum, telefon)
+        self.assertRaises(ValidationError, validate_telefon(telefon))
+
+
+
 
 
 
