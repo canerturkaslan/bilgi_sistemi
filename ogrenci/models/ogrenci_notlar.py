@@ -7,7 +7,7 @@ from .ogrenci import Ogrenci
 class Notlar(models.Model):
     ogrenci = models.ForeignKey('Ogrenci', on_delete=models.CASCADE)
     dersler = models.ForeignKey('Dersler', on_delete=models.CASCADE)
-    puan = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(10)])
+    puan = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)])
 
     def __str__(self):
         return "{}  {} - {}".format(self.ogrenci, self.dersler,self.puan)
