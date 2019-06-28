@@ -8,7 +8,7 @@ pipeline {
 
   environment {
     PACKAGE_TYPE = 'Project'
-    APP_URL = 'http://product-ipam-ui-common.apps.skyz.tech/'
+    APP_URL = '//'
   }
 
   stages {
