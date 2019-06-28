@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    build: .
+
+    container_name: ogrenci_service
+    volumes:
+      - .:/ogrenci_service
+    ports:
+      - "8000:8000"
