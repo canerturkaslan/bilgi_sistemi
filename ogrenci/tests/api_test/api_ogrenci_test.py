@@ -54,13 +54,13 @@ class EntryResourceOgrenciTest(BaseOgrenciViewTest,ResourceTestCaseMixin,APITest
 
     def test_post_ogrenci_api_json(self):
         client = APIClient()
-        response = client.post('/api/v1/ogrenci/', {'isim': 'caner','soyisim':'turkaslan','bolum':2,'telefon':'+90 (531) 406 01 89'}, format='json')
+        response = client.post('/api/v1/ogrenci/', {'isim': 'caner','soyisim':'turkaslan','bolum':'Bilgisayar Muh','telefon':'+90 (531) 406 01 89'}, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_create_ogrenci_api(self):
 
         url = '/api/v1/ogrenci/'
-        data = {'isim': 'caner','soyisim':'turkaslan','bolum':2,'telefon':'+90 (531) 406 01 89'}
+        data = {'isim': 'caner','soyisim':'turkaslan','bolum':'Bilgisayar Muh','telefon':'+90 (531) 406 01 89'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Ogrenci.objects.count(), 3)
@@ -76,11 +76,10 @@ class EntryResourceOgrenciTest(BaseOgrenciViewTest,ResourceTestCaseMixin,APITest
 
     def test_put_ogrenci_api(self):
         url = '/api/v1/ogrenci/1/'
-        data = {'isim':"Ali",'soyisim':"Veli","bolum":2,'telefon':"+90 (552) 887 23 73"}
+        data = {'isim':"Ali",'soyisim':"Veli","bolum":'Bilgisayar Muh','telefon':"+90 (552) 887 23 73"}
         response = self.client.put(url,data)
         self.assertNotEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         test_db=Ogrenci.objects.get(id=1)
-        self.assertEqual(2,test_db.bolum_id)
         self.assertEqual("Ali",test_db.isim)
         self.assertEqual("+90 (552) 887 23 73",test_db.telefon)
 

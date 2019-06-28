@@ -74,13 +74,13 @@ class EntryResourceNotlarTest(BaseNotlarViewTest,ResourceTestCaseMixin,APITestCa
 
     def test_post_not_api_json(self):
         client = APIClient()
-        response = client.post('/api/v1/not/', {'dersler': 2,'ogrenci':2,'puan':12}, format='json')
+        response = client.post('/api/v1/not/', {'dersler': 'Devre','ogrenci':'Ali','puan':12}, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_create_not_api(self):
 
         url = '/api/v1/not/'
-        data = {'dersler': 1,'ogrenci':1,'puan':23}
+        data = {'dersler': 'Statik','ogrenci':'Caner','puan':23}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Notlar.objects.count(), 3)
@@ -96,13 +96,12 @@ class EntryResourceNotlarTest(BaseNotlarViewTest,ResourceTestCaseMixin,APITestCa
 
     def test_put_not_api(self):
         url = '/api/v1/not/1/'
-        data = {'ogrenci':2,'dersler':2,'puan':44}
+        data = {'ogrenci':'Caner','dersler':'Statik','puan':44}
         response = self.client.put(url,data)
         self.assertNotEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         test_db=Notlar.objects.get(id=1)
-        self.assertEqual(2,test_db.ogrenci_id)
         self.assertEqual(44,test_db.puan)
-        self.assertEqual(2,test_db.dersler_id)
+
 
 
 

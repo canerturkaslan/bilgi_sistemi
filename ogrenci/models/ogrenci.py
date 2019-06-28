@@ -15,7 +15,7 @@ def validate_telefon(value):
 class Ogrenci(models.Model):
     isim = models.CharField(max_length=15)
     soyisim = models.CharField(max_length=25)
-    bolum = models.ForeignKey('Bolumler', on_delete=models.CASCADE)
+    bolum = models.ForeignKey('Bolumler', related_name='bolum_ogrenci',on_delete=models.CASCADE)
     telefon = models.CharField(max_length=19, validators=[RegexValidator(regex="^\+(\d{2})\s\((\d{3})\)\s(\d{3})\s(\d{2})\s(\d{2})")], null=True)
 
     def __str__(self):

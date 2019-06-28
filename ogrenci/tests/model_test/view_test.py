@@ -25,7 +25,7 @@ class HomePageTest(TestCase):
     def test_get_status(self):
         client = Client()
         response = client.get(reverse('home'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
 
 class NotDetailViewTests(TestCase):
